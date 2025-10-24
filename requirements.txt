@@ -1,0 +1,20 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+opencv-python==4.8.1.78
+ultralytics==8.1.0
+torch==2.1.0
+torchvision==0.16.0
+pillow==10.1.0
+numpy==1.24.3
+pandas==2.1.3
+sqlalchemy==2.0.23
+chromadb==0.4.18
+sentence-transformers==2.2.2
+openai-clip @ git+https://github.com/openai/CLIP.git
+xgboost==2.0.2
+scikit-learn==1.3.2
+pydantic==2.5.0
+python-multipart==0.0.6
+aiofiles==23.2.1
+pyyaml==6.0.1
+requests==2.31.0

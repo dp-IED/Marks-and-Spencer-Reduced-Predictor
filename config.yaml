@@ -1,0 +1,37 @@
+video_processing:
+  frame_extraction_rate: 1.0 # frames per second
+  blur_threshold: 100.0
+  max_frame_size: 1280
+
+yolo:
+  model_path: models/yolo_sticker_detector/best.pt
+  confidence_threshold: 0.5
+  iou_threshold: 0.45
+
+clip:
+  model_name: ViT-L/14
+  embedding_cache: models/product_embeddings/
+  similarity_threshold: 0.65
+
+vllm:
+  model_name: llava-v1.6-vicuna-7b # or API endpoint
+  temperature: 0.2
+  max_tokens: 100
+
+rag:
+  vector_db: chromadb
+  top_k: 5
+  rerank: true
+
+prediction:
+  model_path: models/reduction_predictor/model.pkl
+  feature_version: v1
+  retrain_frequency_days: 7
+  min_training_samples: 500
+
+database:
+  path: data/detections.db
+
+api:
+  host: 0.0.0.0
+  port: 8000
