@@ -1,2 +1,5 @@
-/.DS_Store
-/requirements.txt
+# Created by venv; see https://docs.python.org/3/library/venv.html
+*
+models/chroma_db/
+models/product_embeddings/
+data/
