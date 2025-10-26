@@ -138,35 +138,7 @@ prediction:
 - `GET /api/v1/stats` - System statistics
 - `POST /api/v1/predictions/refresh` - Retrain model
 
-## 🎯 Usage Workflow
-
-### Phase 1: YOLO Training (You'll do this first)
-
-1. Take 200-300 photos of yellow stickers at your local M&S
-2. Annotate using LabelImg or similar tool
-3. Prepare dataset: `python src/training/prepare_yolo_dataset.py`
-4. Train YOLO: `python src/training/yolo_trainer.py`
-
-### Phase 2: Video Processing (Next week onwards)
-
-1. Record videos at your M&S branch daily
-2. Process videos: `python scripts/process_video.py --video video.mp4 --branch "Your Branch"`
-3. Monitor detections in database
-
-### Phase 3: Prediction Model (After 2-4 weeks of data)
-
-1. Train model: `python scripts/train_prediction_model.py`
-2. Get predictions via API: `GET /api/v1/predictions`
-3. Retrain weekly as new data arrives
-
 ## 🛠️ Development
-
-### Adding New Features
-
-1. **New Detection Types**: Extend `StickerDetector` class
-2. **Additional Features**: Modify `FeatureEngineer` class
-3. **New Models**: Implement in `prediction/` directory
-4. **API Endpoints**: Add to `src/api/endpoints.py`
 
 ### Testing
 
@@ -183,28 +155,12 @@ python scripts/train_prediction_model.py --start-date 2024-01-01 --end-date 2024
 
 ## 📈 Performance
 
-### Expected Performance
+### Target Performance
 
 - **YOLO Detection**: mAP > 0.85 for yellow stickers
 - **Product Identification**: > 90% accuracy on manual validation
 - **Prediction Model**: AUC-ROC > 0.75 for reduction probability
 - **Processing Speed**: 10-min video in < 5 minutes
-
-### Optimization Tips
-
-- Use GPU for CLIP embeddings
-- Batch process multiple videos
-- Cache embeddings to avoid recomputation
-- Use smaller YOLO model (yolov8n) for speed
-
-## 🤝 Contributing
-
-### Adding Your Branch Data
-
-1. Record videos at your local M&S branch
-2. Upload via API: `POST /api/v1/videos/upload`
-3. Process videos: `POST /api/v1/videos/{id}/process`
-4. Contribute to shared dataset
 
 ### Data Quality
 
@@ -212,23 +168,6 @@ python scripts/train_prediction_model.py --start-date 2024-01-01 --end-date 2024
 - Include various product categories
 - Ensure good lighting and stable camera
 - Avoid blurry or obstructed views
-
-## 🔍 Troubleshooting
-
-### Common Issues
-
-1. **No stickers detected**: Check YOLO model training
-2. **Poor product matching**: Verify catalog embeddings
-3. **Low prediction accuracy**: Collect more training data
-4. **Slow processing**: Use GPU acceleration
-
-### Debug Mode
-
-```bash
-# Enable debug logging
-export LOG_LEVEL=DEBUG
-python scripts/process_video.py --video test.mp4 --branch "Debug"
-```
 
 ## 📚 Technical Details
 
@@ -248,8 +187,8 @@ python scripts/process_video.py --video test.mp4 --branch "Debug"
 ### Data Flow
 
 1. Video → Frame extraction → YOLO detection
-2. Sticker crops → CLIP embedding → RAG search
-3. Top candidates → VLLM matching → Product ID
+2. Extracted frames → CLIP embedding → RAG search
+3. Top candidates → VLLM confirmation → Product ID
 4. Detection → Database storage → Feature engineering
 5. Historical data → Model training → Predictions
 
