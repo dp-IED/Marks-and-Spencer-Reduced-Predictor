@@ -26,21 +26,8 @@ This system helps predict which M&S products are likely to be reduced by:
 
 ## 🚀 Quick Start
 
-### 1. Installation
 
-```bash
-# Clone repository
-git clone <repository-url>
-cd MetS
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install CLIP
-pip install git+https://github.com/openai/CLIP.git
-```
-
-### 2. Setup
+### 1. Setup
 
 ```bash
 # Precompute catalog embeddings (one-time setup)
@@ -50,7 +37,7 @@ python scripts/precompute_embeddings.py
 python src/api/main.py
 ```
 
-### 3. Process Videos
+### 2. Process Videos
 
 ```bash
 # Process a single video
